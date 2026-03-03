@@ -108,6 +108,12 @@ La création est déléguée aux sous-classes :
 Donc le principe fondamental du Factory Method est respecté : 
 Le client ne connaît pas la classe concrète de l'objet qu'il utilise.
 
+Exécution du code 
+```bash
+javac .\Factory_Method\FactoryMethodExample.java
+java .\Factory_Method\FactoryMethodExample.java
+```
+
 ---
 
 ## Avantages
