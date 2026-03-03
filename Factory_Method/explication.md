@@ -39,9 +39,21 @@ C'est l'interface commune à tous les objets créés.
 **Concrete Products (Produits concrets)**
 
 ```java
-public class CargoRocket implements Rocket
+public class CargoRocket implements Rocket{
+    @Override
+    public void launch(){
+        System.out.println("Lancement d'une fusée Cargo pour transporter du matériel !");
+    }
+}
 
-public class PassengerRocket implements Rocket
+
+public class PassengerRocket implements Rocket {
+    @Override
+    public void launch(){
+        System.out.println("Lancement de la fusée Passagers pour transporter des astronautes !");
+    }
+}
+
 ```
 
 Ce sont les implémentations réelles du produit.
