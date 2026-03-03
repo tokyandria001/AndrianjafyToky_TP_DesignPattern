@@ -111,7 +111,7 @@ Le client ne connaît pas la classe concrète de l'objet qu'il utilise.
 Exécution du code 
 ```bash
 javac .\Factory_Method\FactoryMethodExample.java
-java .\Factory_Method\FactoryMethodExample.java
+java Factory_Method.FactoryMethodExample
 ```
 
 ---
