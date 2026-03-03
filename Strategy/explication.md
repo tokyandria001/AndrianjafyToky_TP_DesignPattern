@@ -26,6 +26,11 @@ Dans mon exemple de calcul des frais de livraison :
 
 Le contexte ne connaît pas les détails des stratégies, il travaille uniquement avec l'interface.
 
+Exécution du code : 
+```bash
+javac .\Strategy\Main.java 
+java Strategy.Main
+```
 ## Avantages
 
 - Respect du principe Open/Closed.
