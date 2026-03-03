@@ -44,11 +44,11 @@ public class SingletonExample {
 
         team1.addJoueur("Messi");
         team1.addJoueur("Ronaldo");
-
         team2.addJoueur(("Neymar"));
+        
         team2.setCoach("Guardiola");
 
         System.out.println("Coach: "+team1.getCoach());
-        System.out.println("Coach: "+team2.getJoueurs());
+        System.out.println("Joeurs: "+team2.getJoueurs());
     }
 }
