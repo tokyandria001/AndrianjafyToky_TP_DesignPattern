@@ -2,102 +2,67 @@
 
 ## Problème
 
-Dans une agence spatiale, il faut préparer différents types de missions.  
-Chaque mission nécessite un type spécifique de fusée :
+Lorsqu'un programme doit créer des objets sans connaître précisement leur type concret à l'avance, le code peut devenir fortement dépendant des classes instanciées.
 
-- **Fusée Cargo** → transporte du matériel  
-- **Fusée Passagers** → transporte des astronautes  
-- **Fusée Exploration** → missions scientifiques  
+Cela rend l'application difficile à modifier ou à faire évoluer.
 
-Si le code créait directement les objets ainsi :
-
-```java
-Rocket r = new CargoRocket();
-```
-
-alors le client serait fortement lié aux classes concrètes.
-
-**Conséquences :**
-
-- Le client doit connaître toutes les fusées existantes
-
-- Ajouter une nouvelle fusée implique de modifier le code existant
-
-- La création d’objets est dispersée dans le programme
-
-- Le code devient fragile et difficile à maintenir
-
-Le problème principal : fort couplage entre le client et les classes concrètes.
-
-Le pattern Factory Method résout ce problème en déléguant la création d’objets à des classes spécialisées appelées factories.
+Le pattern ``Factory Method`` permet de déléguer la création des objets à des sous-classes spécialisées, évitant ainsi de lier le code principal à des classes concrètes.
 
 ## Principe de fonctionnement
 
 Le principe est simple :
+au lieu d'instancier directement un objet avec ``new``, on appelle une méthode de fabrication (factory method).
 
-- Définir une interface commune pour tous les objets (ici Rocket).
+Cette méthode est déclarée dans une classe abstraite, puis redéfinie dans des sous-classes pour créer des objets spécifiques.
 
-- Créer une factory abstraite qui déclare une méthode de création :
+Ainsi : 
 
-```java
-createRocket()
-```
+- Le client manipule une abstraction.
+- La création réelle est déléguée à une factory concrète.
 
-- Chaque type de fusée a sa propre factory qui sait comment la construire.
-
-- Le client demande une fusée à la factory sans connaître la classe exacte.
-
-Résumé :
-Le client demande un objet → la factory décide quel objet instancier → le code devient indépendant des classes concrètes.
+Le code client ne sait pas quelle classe exacte est créée, il travaille uniquement avec l'interface commune.
 
 ## Structure
 
-I***nterface commune***
+**Product (Produit)**
 ```java
 public interface Rocket {
     void launch();
 }
 ```
-Implémentations concrètes
+C'est l'interface commune à tous les objets créés.
 
-- ***CargoRocket***
+**Concrete Products (Produits concrets)**
 
-- ***PassengerRocket***
-
-- ***ExplorationRocket***
-
-Chaque classe définit son propre comportement :
 ```java
-public class CargoRocket implements Rocket {
-    public void launch() {
-        System.out.println("Lancement d'une fusée cargo avec du matériel.");
-    }
-}
+public class CargoRocket implements Rocket
+
+public class PassengerRocket implements Rocket
 ```
 
-**Factory abstraite**
+Ce sont les implémentations réelles du produit.
+Chaque type de fusée possède son propre comportement.
 
+**Creator (Créateur abstrait)**
 ```java
 public abstract class RocketFactory {
     public abstract Rocket createRocket();
 }
 ```
+Déclare la méthode de fabrication createRocket() sans préciser quel objet sera créé.
 
-Cette factory ne crée rien directement : elle définit seulement le contrat.
-
-**Factories concrètes**
-
-Chaque factory est responsable d’un type de fusée :
-
+**Concrete Creators (Créateurs concrets)**
 ```java
-public class CargoRocketFactory extends RocketFactory {
-    public Rocket createRocket() {
-        return new CargoRocket();
-    }
-}
+public class CargoRocketFactory extends RocketFactory
+public class PassengerRocketFactory extends RocketFactory
 ```
 
-**Autres exemples : PassengerRocketFactory, ExplorationRocketFactory.**
+Chaque factory décide quel type de fusée instancier.
+
+**Client**
+```java
+public class FactoryMethodExample
+```
 
 Utilisation par le client
 ```java
@@ -112,27 +77,36 @@ Le client ne connaît que :
 
 - RocketFactory
 
-Il n’utilise jamais new CargoRocket() directement.
+Il n’utilise jamais `new CargoRocket()` directement.
+
+Le client manipule uniquement : 
+
+- l'abstraction Rocket
+- l'abstraction RocketFactory
+
+La création est déléguée aux sous-classes :
+
+- CargoRocketFactory
+- PassengerRocketFactory
+
+Donc le principe fondamental du Factory Method est respecté : 
+Le client ne connaît pas la classe concrète de l'objet qu'il utilise.
 
 ## Avantages
 
-Réduction du couplage entre les classes
+- Réduction du couplage entre le code client et les classes concrètes
 
-Code plus facile à maintenir
+- Respect du principe Open/Closed (ouvert à l’extension, fermé à la modification)
 
-Ajout de nouveaux types sans modifier le code existant
-
-Respect du principe Open/Closed (ouvert à l’extension, fermé à la modification)
-
-Centralisation de la création des objets
+- Centralisation de la création des objets
 
 ## Inconvénients
 
-Augmentation du nombre de classes
+- Augmentation du nombre de classes
 
-Structure plus complexe pour un petit programme
+- Structure plus complexe pour un petit programme
 
-Nécessite une bonne compréhension
+- Nécessite une bonne compréhension
 
 ## Cas d’usage réel possible
 
