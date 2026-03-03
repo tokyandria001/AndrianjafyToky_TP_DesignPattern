@@ -31,7 +31,7 @@ Le problème principal : fort couplage entre le client et les classes concrètes
 
 Le pattern Factory Method résout ce problème en déléguant la création d’objets à des classes spécialisées appelées factories.
 
-## Principe de fonctionnement :
+## Principe de fonctionnement
 
 Le principe est simple :
 
