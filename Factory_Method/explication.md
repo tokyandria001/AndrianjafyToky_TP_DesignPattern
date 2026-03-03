@@ -8,6 +8,8 @@ Cela rend l'application difficile à modifier ou à faire évoluer.
 
 Le pattern ``Factory Method`` permet de déléguer la création des objets à des sous-classes spécialisées, évitant ainsi de lier le code principal à des classes concrètes.
 
+---
+
 ## Principe de fonctionnement
 
 Le principe est simple :
@@ -21,6 +23,8 @@ Ainsi :
 - La création réelle est déléguée à une factory concrète.
 
 Le code client ne sait pas quelle classe exacte est créée, il travaille uniquement avec l'interface commune.
+
+---
 
 ## Structure
 
@@ -92,6 +96,8 @@ La création est déléguée aux sous-classes :
 Donc le principe fondamental du Factory Method est respecté : 
 Le client ne connaît pas la classe concrète de l'objet qu'il utilise.
 
+---
+
 ## Avantages
 
 - Réduction du couplage entre le code client et les classes concrètes
@@ -100,6 +106,8 @@ Le client ne connaît pas la classe concrète de l'objet qu'il utilise.
 
 - Centralisation de la création des objets
 
+---
+
 ## Inconvénients
 
 - Augmentation du nombre de classes
@@ -107,6 +115,8 @@ Le client ne connaît pas la classe concrète de l'objet qu'il utilise.
 - Structure plus complexe pour un petit programme
 
 - Nécessite une bonne compréhension
+
+---
 
 ## Cas d’usage réel possible
 
