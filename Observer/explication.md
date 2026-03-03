@@ -32,12 +32,66 @@ Ainsi :
 
 ## Structure
 
-- **Subject (interface `LightSensorSubject`)** : fournit `attach()`, `detach()` et `notifyObservers()`.
-- **ConcreteSubject (class `LightSensor`)** : implémente l'interface Subject et contient l'état surveillé (`lightLevel`).
-- **Observer (interface `LightObserver`)** : définit la méthode `updateLight()` pour recevoir les notifications.
-- **ConcreteObserver (class `Lamp`)** : implémente l'interface Observer et définit la réaction au changement d'état.
-- **Client (`Main`)** : crée le sujet et les observateurs, les abonne et simule des événements.
+- **Subject (interface `LightSensorSubject`)**
+```java
+public interface LightSensorSubject {
+    void attach(LightObserver observer);
+    void detach(LightObserver observer);
+    void notifyObservers();
+}
+```
+**class `LightSensor`** 
+```java
+public class LightSensor implements LightSensorSubject {
+    private List<LightObserver> observers = new ArrayList<>();
+    private int lightLevel;
 
+    public void setLightLevel(int lightLevel) {
+        this.lightLevel = lightLevel; // change l'état
+        System.out.println("Capteur : niveau de lumière = " + lightLevel);
+        notifyObservers();            // prévient les observateurs
+    }
+```
+implémente l'interface Subject et contient l'état surveillé (`lightLevel`).
+
+**interface `LightObserver`** 
+```java
+public interface LightObserver {
+    void updateLight(int lightLevel);
+}
+
+```
+Il définit la méthode `updateLight()` pour recevoir les notifications.
+
+**class `Lamp`** 
+```java
+public class Lamp implements LightObserver {
+    private String name;
+
+    public Lamp(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public void updateLight(int lightLevel) {
+        if (lightLevel < 50) {
+            System.out.println(name + " s'allume. Le niveau actuel: " + lightLevel);
+        } else {
+            System.out.println(name + " s'éteint. Le niveau actuel: " + lightLevel);
+        }
+    }
+    
+}
+```
+Elle implémente l'interface Observer et définit la réaction au changement d'état.
+
+**Client (`Main`)** : crée le sujet et les observateurs, les abonne et simule des événements.
+
+Exécution du code : 
+```bash
+ javac .\Observer\Main.java
+ java Observer.Main
+```
 ---
 
 ## Avantages
