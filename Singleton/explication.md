@@ -63,6 +63,11 @@ On le voit car :
 - les joueurs ajoués via team1 sont visibles via team2.
 - le coach défini via team2 est visible via team1
 
+Exécution du code : 
+```bash
+javac Singleton\SingletonExample.java
+java Singleton.SingletonExample
+```
 ---
 
 ## Avantages
